@@ -2,7 +2,7 @@ package com.ecommerce.backend.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
+import com.ecommerce.backend.model.Role;
 @Entity
 @Data
 public class User {
@@ -18,5 +18,6 @@ public class User {
 
     private String password;
 
-    private String role; // USER / ADMIN
+    @Enumerated(EnumType.STRING)
+    private Role role; // USER / ADMIN
 }
