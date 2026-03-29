@@ -29,7 +29,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public String login(String email, String password) {
+    public User login(String email, String password) {
     User user = userRepository.findByEmail(email)
             .orElseThrow(() -> new RuntimeException("Invalid email or password"));
 
@@ -38,7 +38,7 @@ public class UserService {
     }
 
     // return email to generate token
-    return user.getEmail();
+    return user;
 }
 
     public Optional<User> findByEmail(String email) {

@@ -32,16 +32,20 @@ public class AuthController {
 
     }
 
-    @PostMapping("/login")
+@PostMapping("/login")
 public ResponseEntity<?> login(@RequestBody LoginRequest request) {
     try {
-        String email = userService.login(request.getEmail(), request.getPassword());
-        String token = jwtUtil.generateToken(email);
+        User user = userService.login(request.getEmail(), request.getPassword());
+
+        String token = jwtUtil.generateToken(
+                user.getEmail(),
+                user.getRole().name() 
+        );
+
         return ResponseEntity.ok(new LoginResponse(token));
+
     } catch (RuntimeException ex) {
-        return ResponseEntity
-                .status(401)
-                .body(ex.getMessage());
+        return ResponseEntity.status(401).body(ex.getMessage());
     }
 }
 }
