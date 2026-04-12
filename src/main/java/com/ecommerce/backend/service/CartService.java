@@ -48,7 +48,7 @@ public class CartService {
 
         return cart;
     }
-    public Map<String, Object> getCart(String email) {
+    public Cart getCart(String email) {
 
     Cart cart = cartRepository.findByUserEmail(email)
             .orElseThrow(() -> new RuntimeException("Cart not found"));
@@ -72,11 +72,7 @@ public class CartService {
         itemList.add(map);
     }
 
-    Map<String, Object> response = new HashMap<>();
-    response.put("items", itemList);
-    response.put("totalAmount", totalAmount);
-
-    return response;
+    return cart;
 }
 
 }

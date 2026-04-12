@@ -44,4 +44,15 @@ public class UserService {
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+    public User updateUser(Long id, User updatedUser) {
+        return userRepository.findById(id).map(user -> {
+            user.setName(updatedUser.getName());
+            user.setEmail(updatedUser.getEmail());
+            if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
+                user.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+            }
+            return userRepository.save(user);
+        }).orElseThrow(() -> new RuntimeException("User not found"));
+    }
 }

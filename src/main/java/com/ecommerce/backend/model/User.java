@@ -1,5 +1,4 @@
 package com.ecommerce.backend.model;
-
 import jakarta.persistence.*;
 import lombok.Data;
 import com.ecommerce.backend.model.Role;
@@ -20,4 +19,6 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role; // USER / ADMIN
+
+    // private isDeleted = false; // Soft delete flag
 }
