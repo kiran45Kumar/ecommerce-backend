@@ -74,5 +74,11 @@ public class CartService {
 
     return cart;
 }
+    public void clearCart(String email) {
+        Cart cart = cartRepository.findByUserEmail(email)
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
 
+        List<CartItem> items = cartItemRepository.findByCart(cart);
+        cartItemRepository.deleteAll(items);
+    }
 }

@@ -32,4 +32,9 @@ public class CartController {
 
         return ResponseEntity.ok(ApiResponse.success("Cart retrieved successfully", cartService.getCart(email)));
     }
+    @PutMapping("/clear")
+    public ResponseEntity<ApiResponse<Void>> clearCart(Authentication authentication) {
+        String email = authentication.getName();
+        cartService.clearCart(email);
+        return ResponseEntity.ok(ApiResponse.success("Cart cleared successfully", null));
 }   
